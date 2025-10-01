@@ -1,0 +1,1135 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/client": {
+      "post": {
+        "operationId": "ClientController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateClientDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a new client",
+        "tags": [
+          "Clients"
+        ]
+      },
+      "get": {
+        "operationId": "ClientController_findAll",
+        "parameters": [
+          {
+            "name": "term",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "flag",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClientDto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "List all clients or search by email/phone",
+        "tags": [
+          "Clients"
+        ]
+      }
+    },
+    "/api/client/{email}": {
+      "get": {
+        "operationId": "ClientController_findById",
+        "parameters": [
+          {
+            "name": "email",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get client by ID (currently uses email in service)",
+        "tags": [
+          "Clients"
+        ]
+      }
+    },
+    "/api/banking-details": {
+      "post": {
+        "operationId": "BankingDetailsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBankingDetailsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a new bank account",
+        "tags": [
+          "Banking Details"
+        ]
+      }
+    },
+    "/api/banking-details/{accountNumber}": {
+      "get": {
+        "operationId": "BankingDetailsController_findByAccountNumber",
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "required": true,
+            "in": "path",
+            "description": "The bank account number",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankingDetailsDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Find bank account by account number",
+        "tags": [
+          "Banking Details"
+        ]
+      }
+    },
+    "/api/banks": {
+      "get": {
+        "operationId": "BankNameController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BankNameDto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all banks",
+        "tags": [
+          "Banks"
+        ]
+      }
+    },
+    "/api/banks/search/{name}": {
+      "get": {
+        "operationId": "BankNameController_findByName",
+        "parameters": [
+          {
+            "name": "name",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BankNameDto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Search banks by name",
+        "tags": [
+          "Banks"
+        ]
+      }
+    },
+    "/api/payment-method": {
+      "get": {
+        "operationId": "PaymentMethodController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "List of available payment methods",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PaymentMethodDto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all payment methods",
+        "tags": [
+          "Payment Methods"
+        ]
+      }
+    },
+    "/api/transactions": {
+      "post": {
+        "operationId": "TransactionController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTransactionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Transaction created successfully"
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a new transaction",
+        "tags": [
+          "Transactions"
+        ]
+      },
+      "put": {
+        "operationId": "TransactionController_updateByReference",
+        "parameters": [
+          {
+            "name": "trxnReference",
+            "required": true,
+            "in": "path",
+            "description": "Transaction reference string",
+            "schema": {}
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Partial transaction data to update",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTransactionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Transaction updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Update transaction by reference",
+        "tags": [
+          "Transactions"
+        ]
+      }
+    },
+    "/api/transactions/{trxnReference}": {
+      "get": {
+        "operationId": "TransactionController_findByReference",
+        "parameters": [
+          {
+            "name": "trxnReference",
+            "required": true,
+            "in": "path",
+            "description": "Transaction reference string",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transaction found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get a transaction by its reference",
+        "tags": [
+          "Transactions"
+        ]
+      }
+    },
+    "/api/invoice": {
+      "post": {
+        "operationId": "InvoiceController_createInvoice",
+        "parameters": [
+          {
+            "name": "flag",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInvoiceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Invoice created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a new invoice",
+        "tags": [
+          "Invoice"
+        ]
+      },
+      "get": {
+        "operationId": "InvoiceController_findInvoices",
+        "parameters": [
+          {
+            "name": "trxnReference",
+            "required": false,
+            "in": "query",
+            "description": "Filter by transaction reference",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "untilCreateAt",
+            "required": false,
+            "in": "query",
+            "description": "Filter by invoice creation date up to this date (ISO 8601)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "untilExpireAt",
+            "required": false,
+            "in": "query",
+            "description": "Filter by invoice expiration date up to this date (ISO 8601)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isFinalState",
+            "required": false,
+            "in": "query",
+            "description": "Filter by transaction final state",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "sortBy",
+            "required": false,
+            "in": "query",
+            "description": "Sort by createdAt or expiresAt (default: expiresAt)",
+            "schema": {
+              "enum": [
+                "createdAt",
+                "expiresAt"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Items per page (default: 10)",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number (default: 0)",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "paymentMethod",
+            "required": false,
+            "in": "query",
+            "description": "Filter by transaction payment method",
+            "schema": {
+              "enum": [
+                "CASH",
+                "EFT",
+                "CREDIT CARD",
+                "DEBIT CARD",
+                "CREDIT"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of invoices with total count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InvoiceDto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get invoices with optional filters",
+        "tags": [
+          "Invoice"
+        ]
+      }
+    },
+    "/api/invoice-item": {
+      "post": {
+        "operationId": "InvoiceItemController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInvoiceItemDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Item saved successfully"
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "summary": "Create a new invoice item",
+        "tags": [
+          "Invoice Items"
+        ]
+      }
+    },
+    "/api/invoice-item/name/{name}": {
+      "get": {
+        "operationId": "InvoiceItemController_getByName",
+        "parameters": [
+          {
+            "name": "name",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InvoiceItemDto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "summary": "Get invoice items by name (LIKE search)",
+        "tags": [
+          "Invoice Items"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Invoice Tracker API",
+    "description": "API documentation for the Small Business Invoice Tracker",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "CreateClientDto": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "accountNumber": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "fullName",
+          "email",
+          "phoneNumber",
+          "bankName",
+          "accountNumber"
+        ]
+      },
+      "ErrorResponseDto": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "object"
+          },
+          "error": {
+            "type": "string"
+          },
+          "statusCode": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "message",
+          "error",
+          "statusCode"
+        ]
+      },
+      "BankNameDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "branchCode": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "branchCode"
+        ]
+      },
+      "BankingDetailsDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "bankName": {
+            "$ref": "#/components/schemas/BankNameDto"
+          },
+          "accountNumber": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "bankName",
+          "accountNumber"
+        ]
+      },
+      "ClientDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "invoiceDtos": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "bankingDetailsDto": {
+            "$ref": "#/components/schemas/BankingDetailsDto"
+          }
+        },
+        "required": [
+          "id",
+          "fullName",
+          "email",
+          "phoneNumber",
+          "invoiceDtos",
+          "bankingDetailsDto"
+        ]
+      },
+      "CreateBankingDetailsDto": {
+        "type": "object",
+        "properties": {
+          "bankName": {
+            "type": "string"
+          },
+          "accountNumber": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "bankName",
+          "accountNumber"
+        ]
+      },
+      "PaymentMethodDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "enum": [
+              "CASH",
+              "EFT",
+              "CREDIT CARD",
+              "DEBIT CARD",
+              "CREDIT"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "CreateTransactionDto": {
+        "type": "object",
+        "properties": {
+          "trxnReference": {
+            "type": "string"
+          },
+          "client": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "paymentMethod": {
+            "type": "string",
+            "enum": [
+              "CASH",
+              "EFT",
+              "CREDIT CARD",
+              "DEBIT CARD",
+              "CREDIT"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "PAID",
+              "FAILED"
+            ]
+          }
+        },
+        "required": [
+          "trxnReference",
+          "client",
+          "amount",
+          "paymentMethod",
+          "status"
+        ]
+      },
+      "TransactionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "trxnReference": {
+            "type": "string"
+          },
+          "client": {
+            "$ref": "#/components/schemas/ClientDto"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "paymentMethod": {
+            "$ref": "#/components/schemas/PaymentMethodDto"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "PAID",
+              "FAILED"
+            ]
+          },
+          "isFinalState": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "expiresAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "trxnReference",
+          "client",
+          "amount",
+          "paymentMethod",
+          "status",
+          "isFinalState",
+          "createdAt",
+          "updatedAt",
+          "expiresAt"
+        ]
+      },
+      "UpdateTransactionDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateInvoiceItemDto": {
+        "type": "object",
+        "properties": {
+          "sku": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "example": "Milk",
+            "description": "Name of the product"
+          },
+          "description": {
+            "type": "string",
+            "example": "50g",
+            "description": "Product description"
+          },
+          "quantity": {
+            "type": "number",
+            "example": 2,
+            "description": "Quantity of the product"
+          },
+          "unitPrice": {
+            "type": "number",
+            "example": 199.99,
+            "description": "Unit price of the product"
+          },
+          "totalPrice": {
+            "type": "number",
+            "example": 399.98,
+            "description": "Total price (quantity * unitPrice)"
+          }
+        },
+        "required": [
+          "sku",
+          "name",
+          "description",
+          "quantity",
+          "unitPrice",
+          "totalPrice"
+        ]
+      },
+      "CreateInvoiceDto": {
+        "type": "object",
+        "properties": {
+          "trxnReference": {
+            "type": "string"
+          },
+          "clientEmail": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "PAID",
+              "FAILED"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          },
+          "itemsDto": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateInvoiceItemDto"
+            }
+          },
+          "transactionDto": {
+            "$ref": "#/components/schemas/CreateTransactionDto"
+          }
+        },
+        "required": [
+          "trxnReference",
+          "clientEmail",
+          "amount",
+          "status",
+          "itemsDto",
+          "transactionDto"
+        ]
+      },
+      "InvoiceItemDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "sku": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "number"
+          },
+          "unitPrice": {
+            "type": "number"
+          },
+          "totalPrice": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "sku",
+          "name",
+          "description",
+          "quantity",
+          "unitPrice",
+          "totalPrice"
+        ]
+      },
+      "InvoiceDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "trxnReference": {
+            "type": "string"
+          },
+          "clientDto": {
+            "$ref": "#/components/schemas/ClientDto"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "PAID",
+              "FAILED"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "expiresAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "itemsDto": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InvoiceItemDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "trxnReference",
+          "clientDto",
+          "amount",
+          "status",
+          "createdAt",
+          "updatedAt",
+          "expiresAt",
+          "itemsDto"
+        ]
+      }
+    }
+  }
+}
